@@ -1,0 +1,4 @@
+ollama
+flask
+
+Note:- Till Now 
