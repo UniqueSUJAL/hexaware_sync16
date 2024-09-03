@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='questionsgenratorstyle.css') }}">
+    <title>Question Generator</title>
+</head>
+<body>
+    <h1>Question Generator</h1>
+    <form method="post">
+        <label for="description">Enter the context for generating questions:</label><br>
+        <textarea id="description" name="description" rows="6" cols="60"></textarea><br><br>
+        <label for="num_questions">Number of questions to generate:</label>
+        <input type="number" id="num_questions" name="num_questions" min="1" max="10" value="5"><br><br>
+        <input type="submit" value="Generate Questions">
+    </form>
+
+    {% if questions %}
+        <h2>Generated Questions:</h2>
+        <ul>
+            {% for question in questions %}
+                <li>{{ question }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
