@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/registerstyles.css"> <!-- Use the same CSS for styling -->
+</head>
+<body>
+    <div class="container">
+        <!-- Left Panel (Sign Up) -->
+        <div class="left-panel">
+            <h2>New Here?</h2>
+            <p>Create your account and join us today!</p>
+            <button type="button" class="signin-button" onclick="location.href='{{ url_for('auth_routes.register') }}'">SIGN UP</button>
+
+
+
+        </div>
+
+        <!-- Right Panel (Login) -->
+        <div class="right-panel">
+            <h2>Login</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="message-list">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+            <form class="login-form" action="{{ url_for('auth_routes.login') }}" method="post">
+                <input type="email" id="email" name="email" placeholder="Email" required><br>
+                <input type="password" id="password" name="password" placeholder="Password" required><br>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+
+            <p class="login-link">Don't have an account? <a href="{{ url_for('auth_routes.register') }}">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user_role | capitalize }} Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboardstyles.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav>
+        <div class="nav-right">
+            <span>Welcome, {{ user_name }} ({{ user_role | capitalize }})</span>
+            <a href="{{ url_for('auth_routes.logout') }}" class="btn">Logout</a>
+
+        </div>
+    </nav>
+
+    <!-- Central Container -->
+    <div class="container">
+        {% if dashboard_type == 'Trainers' %}
+            <div class="sub-container">
+                <h2><a href="{{ url_for('auth_routes.list_curriculum') }}">Curriculum </a></h2>
+                
+            </div>
+            <div class="sub-container">
+                <h2>Generate Question</h2>
+                <!-- Generate question content -->
+            </div>
+            <div class="sub-container">
+                <h2>Inbox</h2>
+                <!-- Inbox content -->
+            </div>
+            <div class="sub-container">
+                <h2>Sent Items</h2>
+                <!-- Sent items content -->
+            </div>
+            <div class="sub-container">
+                <h2>History</h2>
+                <!-- History content -->
+            </div>
+            <div class="sub-container">
+                <h2>Profile</h2>
+                <!-- Profile content -->
+            </div>
+        {% elif dashboard_type == 'Admin' %}
+            <div class="sub-container">
+                <h2>Admin Dashboard</h2>
+                <p>Manage users, system settings, and generate reports.</p>
+                <!-- Admin content -->
+            </div>
+        {% elif dashboard_type == 'Employee' %}
+            <div class="sub-container">
+                <h2>Employee Dashboard</h2>
+                <p>Request question banks and view downloaded materials.</p>
+                <!-- Employee content -->
+            </div>
+        {% else %}
+            <div class="sub-container">
+                <h2>Welcome</h2>
+                <p>You do not have access to any specific features.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Optional: Include JavaScript files -->
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
