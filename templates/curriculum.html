@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Management</title>
+    <link rel="stylesheet" href="/static/dashboardstyles.css">
+</head>
+<body>
+    <h1>Curriculum Management</h1>
+
+    <a href="{{ url_for('auth_routes.dashboard') }}">Back to Dashboard</a>
+
+    <h2>Uploaded Curricula</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Filename</th>
+                <th>Upload Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for curriculum in curricula %}
+                <tr>
+                    <td>{{ curriculum.id }}</td>
+                    <td>{{ curriculum.filename }}</td>
+                    <td>{{ curriculum.upload_date }}</td>
+                    <td>
+                        <a href="{{ url_for('auth_routes.edit_curriculum', curriculum_id=curriculum.id) }}">Edit</a> |
+                        <a href="{{ url_for('auth_routes.view_curriculum', curriculum_id=curriculum.id) }}" class="btn btn-primary">View</a>
+                        <form action="{{ url_for('auth_routes.delete_curriculum', curriculum_id=curriculum.id) }}" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Upload New Curriculum</h3>
+    <form action="{{ url_for('auth_routes.upload_curriculum') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
